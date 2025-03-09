@@ -1,0 +1,62 @@
+.community-container {
+    font-family: "Arial", sans-serif;
+    color: #fff;
+    background: #121212;
+    padding: 20px;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    text-align: center;
+  }
+  
+  section {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+  }
+  
+  input, textarea, button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: none;
+  }
+  
+  button {
+    background: #00ffff;
+    color: #121212;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background: #00cccc;
+  }
+  
+  .project-card, .forum-post {
+    background: #272727;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+  }
+  
+  .comment {
+    margin-left: 20px;
+    font-style: italic;
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  ul li a {
+    color: #00ffff;
+  }
+  
+  ul li a:hover {
+    text-decoration: underline;
+  }
+  
