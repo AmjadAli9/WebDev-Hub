@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "//amjadali9.github.io/WebDev-Hub/static/css/main.f630d69d.css",
-    "main.js": "//amjadali9.github.io/WebDev-Hub/static/js/main.d8d42b8d.js",
-    "static/js/453.f33b33c7.chunk.js": "//amjadali9.github.io/WebDev-Hub/static/js/453.f33b33c7.chunk.js",
-    "index.html": "//amjadali9.github.io/WebDev-Hub/index.html",
-    "main.f630d69d.css.map": "//amjadali9.github.io/WebDev-Hub/static/css/main.f630d69d.css.map",
-    "main.d8d42b8d.js.map": "//amjadali9.github.io/WebDev-Hub/static/js/main.d8d42b8d.js.map",
-    "453.f33b33c7.chunk.js.map": "//amjadali9.github.io/WebDev-Hub/static/js/453.f33b33c7.chunk.js.map"
+    "main.css": "/WebDev-Hub/static/css/main.f630d69d.css",
+    "main.js": "/WebDev-Hub/static/js/main.f346c949.js",
+    "static/js/453.f33b33c7.chunk.js": "/WebDev-Hub/static/js/453.f33b33c7.chunk.js",
+    "index.html": "/WebDev-Hub/index.html",
+    "main.f630d69d.css.map": "/WebDev-Hub/static/css/main.f630d69d.css.map",
+    "main.f346c949.js.map": "/WebDev-Hub/static/js/main.f346c949.js.map",
+    "453.f33b33c7.chunk.js.map": "/WebDev-Hub/static/js/453.f33b33c7.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f630d69d.css",
-    "static/js/main.d8d42b8d.js"
+    "static/js/main.f346c949.js"
   ]
 }
