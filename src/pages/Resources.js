@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./Resources.css";
 
 const Resources = () => {
@@ -7,7 +7,7 @@ const Resources = () => {
   const [randomTip, setRandomTip] = useState("");
   const [resourceOfTheDay, setResourceOfTheDay] = useState({});
 
-  const resources = [
+  const resources = useMemo(() => [
     {
       category: "Tutorials",
       items: [
@@ -24,52 +24,25 @@ const Resources = () => {
       ],
     },
     {
-      category: "Handwritten Notes",
-      items: [
-        {
-          title: "HTML Notes",
-          link: "https://drive.google.com/file/d/1BpV99BPGRtjEPFe2AH8Wh7gCum1kpA8J/view",
-          rating: 5,
-        },
-        {
-          title: "JavaScript Notes",
-          link: "https://drive.google.com/file/d/1Ty8PrMnXzo61-QRXtWdMW3FH4guRo6Gv/view",
-          rating: 4.9,
-        },
-        {
-          title: "CSS Notes",
-          link: "https://drive.google.com/file/d/19t4lraBrBz685AD-cEiPMrbyiDffQqdE/view",
-          rating: 4.8,
-        },
-      ],
-    },
-    {
       category: "Tools",
       items: [
         { title: "VS Code", link: "https://code.visualstudio.com/", rating: 5 },
         { title: "GitHub", link: "https://github.com/", rating: 5 },
-        { title: "Netlify", link: "https://www.netlify.com/", rating: 4.8 },
-        { title: "Vercel", link: "https://vercel.com/", rating: 4.9 },
-        { title: "Postman", link: "https://www.postman.com/", rating: 4.7 },
-        { title: "Figma", link: "https://www.figma.com/", rating: 4.9 },
       ],
     },
-  ];
+  ], []);
 
-  const tips = [
+  const tips = useMemo(() => [
     "🚀 Consistency beats perfection in web development.",
     "💡 Learn Git and GitHub — it’s essential for collaboration.",
-    "🎨 Mastering CSS Grid and Flexbox makes layout a breeze.",
-    "⚡ Use browser DevTools to debug like a pro.",
-    "💻 VS Code extensions like Prettier and Live Server save time.",
-  ];
+  ], []);
 
   useEffect(() => {
-    setFilteredResources(resources);
     setRandomTip(tips[Math.floor(Math.random() * tips.length)]);
     const allItems = resources.flatMap((section) => section.items);
     setResourceOfTheDay(allItems[Math.floor(Math.random() * allItems.length)]);
-  }, []);
+    setFilteredResources(resources);
+  }, [resources, tips]);
 
   const handleSearch = (e) => {
     const searchTerm = e.target.value.toLowerCase();
@@ -82,6 +55,12 @@ const Resources = () => {
       ),
     }));
     setFilteredResources(filtered);
+  };
+
+  const highlightText = (text, highlight) => {
+    if (!highlight) return text;
+    const regex = new RegExp(`(${highlight})`, "gi");
+    return text.replace(regex, "<mark>$1</mark>");
   };
 
   return (
@@ -108,11 +87,12 @@ const Resources = () => {
         onChange={handleSearch}
         className="search-bar"
       />
+      {search && <button onClick={() => { setSearch(""); setFilteredResources(resources); }}>❌ Clear Search</button>}
 
       <div className="tip-box">💡 Dev Tip: {randomTip}</div>
 
       <div className="resource-of-the-day">
-        🌟 Resource of the Day:{" "}
+        🌟 Resource of the Day: 
         <a href={resourceOfTheDay.link} target="_blank" rel="noopener noreferrer">
           {resourceOfTheDay.title}
         </a>
@@ -130,8 +110,9 @@ const Resources = () => {
                 rel="noopener noreferrer"
                 className="resource-card"
               >
-                <span>{item.title}</span>
+                <span dangerouslySetInnerHTML={{ __html: highlightText(item.title, search) }} />
                 <span>⭐ {item.rating}</span>
+                <button onClick={() => navigator.clipboard.writeText(item.link)}>🔗 Copy Link</button>
               </a>
             ))}
           </div>

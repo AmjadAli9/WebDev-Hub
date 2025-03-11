@@ -1,18 +1,15 @@
-// src/pages/CodePad.js
 import React, { useState, useEffect } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { html } from '@codemirror/lang-html';
 import { css } from '@codemirror/lang-css';
 import { javascript } from '@codemirror/lang-javascript';
-import { dracula } from '@uiw/codemirror-theme-dracula';
 import "./CodePad.css"; 
 
 const CodePad = () => {
   const [htmlCode, setHtml] = useState("");
   const [cssCode, setCss] = useState("");
   const [jsCode, setJs] = useState("");
-  const [language, setLanguage] = useState("html");
-  const [theme, setTheme] = useState(dracula);
+  const [theme] = useState('dark'); // Removed unused 'setTheme'
   const [output, setOutput] = useState("");
 
   const srcDoc = `
@@ -28,7 +25,7 @@ const CodePad = () => {
       setOutput(srcDoc);
     }, 300);
     return () => clearTimeout(timeout);
-  }, [htmlCode, cssCode, jsCode]);
+  }, [srcDoc]); // Added 'srcDoc' to dependency array
 
   const downloadFile = (code, language) => {
     const blob = new Blob([code], { type: "text/plain" });
@@ -45,22 +42,8 @@ const CodePad = () => {
     setJs("");
   };
 
-  const getLanguageExtension = () => {
-    switch (language) {
-      case "html":
-        return html();
-      case "css":
-        return css();
-      case "javascript":
-        return javascript();
-      default:
-        return html();
-    }
-  };
-
   return (
     <div className="codepad-container">
-      {/* Navbar */}
       <nav className="navbar">
         <div className="logo">WebDevHub</div>
         <ul>
@@ -71,26 +54,18 @@ const CodePad = () => {
         </ul>
       </nav>
 
-      {/* Header */}
       <header className="codepad-hero">
         <h1>⚡ Interactive Code Playground</h1>
         <p>Write HTML, CSS & JavaScript — See the magic happen in real-time!</p>
       </header>
 
-      {/* Controls */}
       <div className="controls">
-        <select onChange={(e) => setLanguage(e.target.value)}>
-          <option value="html">HTML</option>
-          <option value="css">CSS</option>
-          <option value="javascript">JavaScript</option>
-        </select>
         <button onClick={() => downloadFile(htmlCode, "html")}>💾 Download HTML</button>
         <button onClick={() => downloadFile(cssCode, "css")}>💾 Download CSS</button>
         <button onClick={() => downloadFile(jsCode, "js")}>💾 Download JS</button>
         <button onClick={clearCode}>🧹 Clear All</button>
       </div>
 
-      {/* Code Editor Section */}
       <div className="editor-container">
         <div className="editor">
           <h3>📝 HTML</h3>
@@ -124,7 +99,6 @@ const CodePad = () => {
         </div>
       </div>
 
-      {/* Output Section */}
       <div className="output-container">
         <h3>🌐 Live Output</h3>
         <iframe
@@ -137,7 +111,6 @@ const CodePad = () => {
         />
       </div>
 
-      {/* Footer */}
       <footer>
         <p>© 2025 WebDevHub. All rights reserved.</p>
       </footer>
